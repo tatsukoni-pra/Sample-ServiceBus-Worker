@@ -1,0 +1,19 @@
+{
+  "name": "worker",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "=18.17.1"
+  },
+  "dependencies": {
+    "@azure/service-bus": "^7.9.4"
+  },
+  "volta": {
+    "node": "18.17.1",
+    "npm": "10.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
