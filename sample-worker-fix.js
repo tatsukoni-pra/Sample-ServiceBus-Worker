@@ -30,6 +30,7 @@ async function main() {
             console.error("エラーの詳細: ", err);
           });
         });
+      // receiver.abandonMessage(message);
       console.log("processMessage Finish messageId: ", message.messageId);
     },
     processError: async (err) => {
@@ -40,6 +41,8 @@ async function main() {
       console.error("エラーの理由: ", err.error.code);
       console.error("エラーの詳細: ", err);
     },
+  }, {
+    autoCompleteMessages: false
   });
 }
 
