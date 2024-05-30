@@ -42,6 +42,11 @@ async function main() {
       console.error("エラーの詳細: ", err);
     },
   }, {
+    // 以下の追記が必要。
+    // 追記がない場合だと、autoCompleteMessages: true(デフォルト)となる。
+    // この場合、processMessageハンドラ完了後に、自動的にメッセージが解決される。
+    // しかし、execute関数は非同期で動くので、processMessageハンドラ完了後、メッセージが既に解決された状態から、completeMessage/abandonMessage を実施しようとしてエラーになる
+    // 参考：https://learn.microsoft.com/ja-jp/javascript/api/%40azure/service-bus/subscribeoptions?view=azure-node-latest#@azure-service-bus-subscribeoptions-autocompletemessages
     autoCompleteMessages: false
   });
 }
