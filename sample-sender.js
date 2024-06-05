@@ -1,8 +1,10 @@
 import { ServiceBusClient } from "@azure/service-bus";
 import crypto from "crypto";
+import { config } from "dotenv";
+config();
 
-const connectionString = "ServiceBus接続文字列に置き換える";
-const topicName = "ServiceBusトピック名に置き換える";
+const connectionString = process.env.CONNECTION_STRING;
+const topicName = process.env.TOPIC_NAME;
 
 // ユニークIDを生成
 const messageId = () => {
@@ -10,6 +12,11 @@ const messageId = () => {
 }
 
 async function main() {
+  // const sbClient = new ServiceBusClient(connectionString, {
+  //   retryOptions: {
+  //     maxRetries: 3
+  //   }
+  // });
   const sbClient = new ServiceBusClient(connectionString);
   const sender = sbClient.createSender(topicName);
 
@@ -22,16 +29,14 @@ async function main() {
     };
     let batch = await sender.createMessageBatch();
     if (!batch.tryAddMessage(message)) {
-      await sender.sendMessages(batch);
-      batch = await sender.createMessageBatch();
-      if (!batch.tryAddMessage()) {
-        throw new Error("Message too big to fit in a batch");
-      }
+      throw new Error("メッセージバッチの追加に失敗しました");
     }
     await sender.sendMessages(batch);
     console.log(`Sent a batch of messages to the queue: ${topicName}`);
-    await sender.close();
+  } catch (err) {
+    console.log("Error occurred: ", err);
   } finally {
+    await sender.close();
     await sbClient.close();
   }
 }

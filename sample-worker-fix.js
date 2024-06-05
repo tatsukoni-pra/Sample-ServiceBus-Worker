@@ -1,8 +1,10 @@
 import { ServiceBusClient } from "@azure/service-bus";
+import { config } from "dotenv";
+config();
 
-const connectionString = "ServiceBus接続文字列に置き換える";
-const topicName = "ServiceBusトピック名に置き換える";
-const subscriptionName = "ServiceBusサブスクリプション名に置き換える";
+const connectionString = process.env.CONNECTION_STRING;
+const topicName = process.env.TOPIC_NAME;
+const subscriptionName = process.env.SUBSCRIPTION_NAME;
 
 async function main() {
   const sbClient = new ServiceBusClient(connectionString);
