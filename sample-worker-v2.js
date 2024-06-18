@@ -34,7 +34,7 @@ async function main() {
       console.error("エラーの詳細: ", err);
     },
   }, {
-    autoCompleteMessages: false,
+    autoCompleteMessages: true,
     maxConcurrentCalls: 1,
   });
 }

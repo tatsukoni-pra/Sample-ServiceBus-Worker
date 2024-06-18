@@ -12,11 +12,6 @@ const messageId = () => {
 }
 
 async function main() {
-  // const sbClient = new ServiceBusClient(connectionString, {
-  //   retryOptions: {
-  //     maxRetries: 3
-  //   }
-  // });
   const sbClient = new ServiceBusClient(connectionString);
   const sender = sbClient.createSender(topicName);
 
