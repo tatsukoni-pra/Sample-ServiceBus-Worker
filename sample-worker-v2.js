@@ -25,7 +25,6 @@ async function main() {
             console.error("エラーの詳細: ", err);
           });
         });
-        await wait(1800000);
       console.log((new Date()).toISOString() + "processMessage Finish messageId: ", message.messageId);
     },
     processError: async (err) => {
@@ -34,14 +33,13 @@ async function main() {
       console.error("エラーの詳細: ", err);
     },
   }, {
-    autoCompleteMessages: true,
+    autoCompleteMessages: false,
     maxConcurrentCalls: 1,
   });
 }
 
 async function execute(messageId) {
   console.log((new Date()).toISOString() + "Start Execute message: ", messageId);
-  await wait(1200000);
   console.log((new Date()).toISOString() + "Finish Execute message: ", messageId);
 }
 
