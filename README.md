@@ -12,7 +12,10 @@ node, npm を実行環境にインストールした上で以下を実行して�
 
 ```
 npm install
+cp .env.samlpe .env
 ```
+
+`.env`には、必要な設定値を記述してください。
 
 ## ServiceBusにメッセージを送信する
 
